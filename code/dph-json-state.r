@@ -3,8 +3,6 @@ library(jsonlite)
 library(scales)
 library(lubridate)
 
-setwd("~/Dropbox/Personal/website/il-covid19/")
-
 # Read in state-level data from DPH json file
 table <- fromJSON("https://dph.illinois.gov//sitefiles/COVIDHistoricalTestResults.json")
 state <- table[["state_testing_results"]]
