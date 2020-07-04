@@ -21,62 +21,118 @@ write_csv(x = select(stateDF,-c(testDate)), path = "il-covid.csv")
 # Generate lags, change in vars, 7-day moving average
 stateDF <- stateDF %>%
   mutate(
-    # Cases
-    lag.cases = lag(confirmed_cases, order_by = date),
-    lag2.cases = lag(confirmed_cases, n = 2, order_by = date),
-    lag3.cases = lag(confirmed_cases, n = 3, order_by = date),
-    lag4.cases = lag(confirmed_cases, n = 4, order_by = date),
-    lag5.cases = lag(confirmed_cases, n = 5, order_by = date),
-    lag6.cases = lag(confirmed_cases, n = 6, order_by = date),
-    cases.ma.7day = (confirmed_cases + lag.cases + lag2.cases + lag3.cases + lag4.cases + lag5.cases + lag6.cases)/7,
-    chg.cases = confirmed_cases - lag.cases,
-    lag.chg.cases = lag(chg.cases, order_by = date),
-    lag2.chg.cases = lag(chg.cases, n = 2, order_by = date),
-    lag3.chg.cases = lag(chg.cases, n = 3, order_by = date),
-    lag4.chg.cases = lag(chg.cases, n = 4, order_by = date),
-    lag5.chg.cases = lag(chg.cases, n = 5, order_by = date),
-    lag6.chg.cases = lag(chg.cases, n = 6, order_by = date),
-    cases.ma.7day.chg = (chg.cases + lag.chg.cases + lag2.chg.cases + lag2.chg.cases + lag4.chg.cases + lag5.chg.cases + lag6.chg.cases)/7,
-    # Deaths
-    lag.deaths = lag(deaths, order_by = date),
-    lag2.deaths = lag(deaths, n = 2, order_by = date),
-    lag3.deaths = lag(deaths, n = 3, order_by = date),
-    lag4.deaths = lag(deaths, n = 4, order_by = date),
-    lag5.deaths = lag(deaths, n = 5, order_by = date),
-    lag6.deaths = lag(deaths, n = 6, order_by = date),
-    deaths.ma.7day = (deaths + lag.deaths + lag2.deaths + lag3.deaths + lag4.deaths + lag5.deaths + lag6.deaths)/7,
-    chg.deaths = deaths - lag.deaths,
-    lag.chg.deaths = lag(chg.deaths, order_by = date),
-    lag2.chg.deaths = lag(chg.deaths, n = 2, order_by = date),
-    lag3.chg.deaths = lag(chg.deaths, n = 3, order_by = date),
-    lag4.chg.deaths = lag(chg.deaths, n = 4, order_by = date),
-    lag5.chg.deaths = lag(chg.deaths, n = 5, order_by = date),
-    lag6.chg.deaths = lag(chg.deaths, n = 6, order_by = date),
-    deaths.ma.7day.chg = (chg.deaths + lag.chg.deaths + lag2.chg.deaths + lag3.chg.deaths + lag4.chg.deaths + lag5.chg.deaths + lag6.chg.deaths)/7,
-    # Testing
-    lag.tested = lag(total_tested, order_by = date),
-    lag2.tested = lag(total_tested, n = 2, order_by = date),
-    lag3.tested = lag(total_tested, n = 3, order_by = date),
-    lag4.tested = lag(total_tested, n = 4, order_by = date),
-    lag5.tested = lag(total_tested, n = 5, order_by = date),
-    lag6.tested = lag(total_tested, n = 6, order_by = date),
-    tested.ma.7day = (total_tested + lag.tested + lag2.tested + lag3.tested + lag4.tested + lag5.tested + lag6.tested)/7,
-    chg.tested = total_tested - lag.tested,
-    lag.chg.tested = lag(chg.tested, order_by = date),
-    lag2.chg.tested = lag(chg.tested, n = 2, order_by = date),
-    lag3.chg.tested = lag(chg.tested, n = 3, order_by = date),
-    lag4.chg.tested = lag(chg.tested, n = 4, order_by = date),
-    lag5.chg.tested = lag(chg.tested, n = 5, order_by = date),
-    lag6.chg.tested = lag(chg.tested, n = 6, order_by = date),
-    tested.ma.7day.chg = (chg.tested + lag.chg.tested + lag2.chg.tested + lag3.chg.tested + lag4.chg.tested + lag5.chg.tested + lag6.chg.tested)/7,
-    perc.positive = chg.cases/chg.tested,
-    lag.perc.positive = lag(perc.positive, order_by = date),
-    lag2.perc.positive = lag(perc.positive, n = 2, order_by = date),
-    lag3.perc.positive = lag(perc.positive, n = 3, order_by = date),
-    lag4.perc.positive = lag(perc.positive, n = 4, order_by = date),
-    lag5.perc.positive = lag(perc.positive, n = 5, order_by = date),
-    lag6.perc.positive = lag(perc.positive, n = 6, order_by = date),
-    perc.positive.ma.7day = (perc.positive + lag2.perc.positive + lag3.perc.positive + lag4.perc.positive + lag5.perc.positive + lag6.perc.positive)/7
+    confirmed_cases_1 = lag(confirmed_cases, order_by = date),
+    confirmed_cases_2 = lag(confirmed_cases, n = 2, order_by = date),
+    confirmed_cases_3 = lag(confirmed_cases, n = 3, order_by = date),
+    confirmed_cases_4 = lag(confirmed_cases, n = 4, order_by = date),
+    confirmed_cases_5 = lag(confirmed_cases, n = 5, order_by = date),
+    confirmed_cases_6 = lag(confirmed_cases, n = 6, order_by = date),
+    confirmed_cases_7day_ma = (
+      confirmed_cases +
+      confirmed_cases_1 +
+      confirmed_cases_2 +
+      confirmed_cases_3 +
+      confirmed_cases_4 +
+      confirmed_cases_5 +
+      confirmed_cases_6
+    )/7,
+    deaths_1 = lag(deaths, order_by = date),
+    deaths_2 = lag(deaths, n = 2, order_by = date),
+    deaths_3 = lag(deaths, n = 3, order_by = date),
+    deaths_4 = lag(deaths, n = 4, order_by = date),
+    deaths_5 = lag(deaths, n = 5, order_by = date),
+    deaths_6 = lag(deaths, n = 6, order_by = date),
+    deaths_7day_ma = (
+      deaths +
+      deaths_1 +
+      deaths_2 +
+      deaths_3 +
+      deaths_4 +
+      deaths_5 +
+      deaths_6
+    )/7,
+    total_tested_1 = lag(total_tested, order_by = date),
+    total_tested_2 = lag(total_tested, n = 2, order_by = date),
+    total_tested_3 = lag(total_tested, n = 3, order_by = date),
+    total_tested_4 = lag(total_tested, n = 4, order_by = date),
+    total_tested_5 = lag(total_tested, n = 5, order_by = date),
+    total_tested_6 = lag(total_tested, n = 6, order_by = date),
+    total_tested_7day_ma = (
+      total_tested +
+      total_tested_1 +
+      total_tested_2 +
+      total_tested_3 +
+      total_tested_4 +
+      total_tested_5 +
+      total_tested_6
+    )/7,
+    # Create Daily Data
+    # `across` requires the most recent version of dplyr
+    across(total_tested:deaths, ~.x - lag(.x, order_by = date), .names = "daily_{col}"),
+    ## Cases
+    daily_confirmed_cases_1 = lag(daily_confirmed_cases, order_by = date),
+    daily_confirmed_cases_2 = lag(daily_confirmed_cases, n = 2, order_by = date),
+    daily_confirmed_cases_3 = lag(daily_confirmed_cases, n = 3, order_by = date),
+    daily_confirmed_cases_4 = lag(daily_confirmed_cases, n = 4, order_by = date),
+    daily_confirmed_cases_5 = lag(daily_confirmed_cases, n = 5, order_by = date),
+    daily_confirmed_cases_6 = lag(daily_confirmed_cases, n = 6, order_by = date),
+    daily_confirmed_cases_7day_ma = (
+      daily_confirmed_cases +
+      daily_confirmed_cases_1 +
+      daily_confirmed_cases_2 +
+      daily_confirmed_cases_3 +
+      daily_confirmed_cases_4 +
+      daily_confirmed_cases_5 +
+      daily_confirmed_cases_6
+    )/7,
+    ## Deaths
+    daily_deaths_1 = lag(daily_deaths, order_by = date),
+    daily_deaths_2 = lag(daily_deaths, n = 2, order_by = date),
+    daily_deaths_3 = lag(daily_deaths, n = 3, order_by = date),
+    daily_deaths_4 = lag(daily_deaths, n = 4, order_by = date),
+    daily_deaths_5 = lag(daily_deaths, n = 5, order_by = date),
+    daily_deaths_6 = lag(daily_deaths, n = 6, order_by = date),
+    daily_deaths_7day_ma = (
+      daily_deaths +
+      daily_deaths_1 +
+      daily_deaths_2 +
+      daily_deaths_3 +
+      daily_deaths_4 +
+      daily_deaths_5 +
+      daily_deaths_6
+    )/7,
+    ## Testing
+    daily_total_tested_1 = lag(daily_total_tested, order_by = date),
+    daily_total_tested_2 = lag(daily_total_tested, n = 2, order_by = date),
+    daily_total_tested_3 = lag(daily_total_tested, n = 3, order_by = date),
+    daily_total_tested_4 = lag(daily_total_tested, n = 4, order_by = date),
+    daily_total_tested_5 = lag(daily_total_tested, n = 5, order_by = date),
+    daily_total_tested_6 = lag(daily_total_tested, n = 6, order_by = date),
+    daily_total_tested_7day_ma = (
+      daily_total_tested +
+      daily_total_tested_1 +
+      daily_total_tested_2 +
+      daily_total_tested_3 +
+      daily_total_tested_4 +
+      daily_total_tested_5 +
+      daily_total_tested_6
+    )/7,
+    daily_positive_rate = daily_confirmed_cases/daily_total_tested,
+    daily_positive_rate_1 = lag(daily_positive_rate, order_by = date),
+    daily_positive_rate_2 = lag(daily_positive_rate, n = 2, order_by = date),
+    daily_positive_rate_3 = lag(daily_positive_rate, n = 3, order_by = date),
+    daily_positive_rate_4 = lag(daily_positive_rate, n = 4, order_by = date),
+    daily_positive_rate_5 = lag(daily_positive_rate, n = 5, order_by = date),
+    daily_positive_rate_6 = lag(daily_positive_rate, n = 6, order_by = date),
+    daily_positive_rate_7day_ma = (
+      daily_positive_rate +
+      daily_positive_rate_1 +
+      daily_positive_rate_2 +
+      daily_positive_rate_3 +
+      daily_positive_rate_4 +
+      daily_positive_rate_5 +
+      daily_positive_rate_6
+    )/7
   )
 
 # Create graphics

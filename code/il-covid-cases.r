@@ -6,7 +6,7 @@ il.cases <- ggplot(stateDF) +
   geom_bar(aes(y = confirmed_cases, x = ymd(date)), stat="identity", fill="#E69F00") +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
   #family="Public Sans Thin", lineheight=0.95, size=2, color="#2b2b2b") +
-  geom_line(aes(y=cases.ma.7day, x = ymd(date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=confirmed_cases_7day_ma, x = ymd(date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "3 days",
@@ -53,10 +53,10 @@ ggsave(plot=il.cases, "il-covid-cases.png", path="./images", width=10, height=6,
 
 # Change in Cases plot
 il.chg.cases <- ggplot(stateDF) +
-  geom_bar(aes(y = chg.cases, x = ymd(date)), stat="identity", fill="#E69F00") +
+  geom_bar(aes(y = daily_confirmed_cases, x = ymd(date)), stat="identity", fill="#E69F00") +
   #geom_text(aes(y = chg.cases, x = ymd(date), label = comma(chg.cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
   #family="Public Sans Thin", lineheight=0.95, size=2.25, color="#2b2b2b") +
-  geom_line(aes(y=cases.ma.7day.chg, x = ymd(date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=daily_confirmed_cases_7day_ma, x = ymd(date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "3 days",

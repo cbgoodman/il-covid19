@@ -6,7 +6,7 @@ il.tested <- ggplot(stateDF) +
   geom_bar(aes(y = total_tested, x = ymd(date)), stat="identity", fill="#E69F00") +
   #geom_text(aes(y = tested, x = ymd(date), label = comma(tested, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
 #  family="Public Sans Light", lineheight=0.95, size=2, color="#2b2b2b") +
-  geom_line(aes(y=tested.ma.7day, x = ymd(date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=total_tested_7day_ma, x = ymd(date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "3 days",
@@ -53,10 +53,10 @@ ggsave(plot=il.tested, "il-covid-tests.png", path="./images", width=10, height=6
 
 # Change in Cases plot
 il.chg.tested <- ggplot(stateDF) +
-  geom_bar(aes(y = chg.tested, x = ymd(date)), stat="identity", fill="#E69F00") +
+  geom_bar(aes(y = daily_total_tested, x = ymd(date)), stat="identity", fill="#E69F00") +
   #geom_text(aes(y = chg.tested, x = ymd(date), label = comma(chg.tested, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
   #family="Public Sans Thin", lineheight=0.95, size=2, color="#2b2b2b") +
-  geom_line(aes(y=tested.ma.7day.chg, x = ymd(date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=daily_total_tested_7day_ma, x = ymd(date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "3 days",
@@ -102,8 +102,8 @@ ggsave(plot=il.chg.tested, "il-covid-chg-test.png", path="./images", width=10, h
 
 # Positive rate
 il.positive <- ggplot(stateDF) +
-  geom_line(aes(y = perc.positive, x = ymd(date)), color="#E69F00") +
-  geom_line(aes(y=perc.positive.ma.7day, x = ymd(date)), color = "#7F7F7F") +
+  geom_line(aes(y = daily_positive_rate, x = ymd(date)), color="#E69F00") +
+  geom_line(aes(y=daily_positive_rate_7day_ma, x = ymd(date)), color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "3 days",
