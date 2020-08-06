@@ -4,12 +4,8 @@ library(reshape2)
 library(scales)
 library(lubridate)
 
-# Set today's date
-today <- today()
-today <- format(today,"%B %d, %Y")
-
 # Read in county-level data from DPH json file
-json <- fromJSON("https://dph.illinois.gov/sitefiles/COVIDHistoricalTestResults.json")
+json <- fromJSON("https://dph.illinois.gov//sitefiles/COVIDHistoricalTestResults.json")
 # Save statewide date
 json_dates <- as_tibble(json$historical_county$values)
 json_dates <- json_dates %>% select(testDate) %>% mutate(testDate = mdy(testDate))

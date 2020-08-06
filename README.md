@@ -20,7 +20,7 @@ All data are sourced from the Illinois Department of Public Health [https://dph.
 ## Data files
 There are two files from which all the above visualizations are made. The variable metadata can be found below. The first four or five variables are direct imports from IDPH.
 
-> Note: Throughout the data, there are negative numbers for daily counts. This is an artifact of the reporting by IDPH when the total number of tests/cases/deaths is higher the day before than the current day. I have left them in the data for completeness; however, you may wish change these negative numbers to zeros.
+> Note: Throughout the data, there are negative numbers for daily counts. This is an artifact of the reporting by IDPH when the total number of tests/cases/deaths is higher the day before than the current day. I have left them in the data for completeness; however, you may wish to change these negative numbers to zeros.
 
 * `il-covid.csv` - State-level COVID-19 data, plus calculated daily counts
   * `testDate` - Date
