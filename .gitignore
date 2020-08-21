@@ -1,8 +1,10 @@
 .Rhistory
 .DS_Store
+code/dph-json-county-heatmap.r
 code/dph-json-hospitalization.r
 code/dph-json-zip.r
 code/dph-json-region.r
+images/covid-heatmap.ong
 images/chi-covid-chg-deaths.png
 images/chi-covid-positivity.png
 images/regional-positivity-rate.png
