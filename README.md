@@ -17,6 +17,9 @@ All data are sourced from the Illinois Department of Public Health [https://dph.
 ### Daily case count and 7-day moving average, Chicago Metro Counties
 ![change in cma covid-19 case count](images/chi-covid-chg-cases.png)
 
+### Daily case count and 7-day moving average, 4-year public higher education hosting counties
+![change in cma covid-19 case count](images/chi-covid-chg-cases.png)
+
 ## Data files
 There are two files from which all the above visualizations are made. The variable metadata can be found below. The first four or five variables are direct imports from IDPH.
 
@@ -50,6 +53,7 @@ There are two files from which all the above visualizations are made. The variab
 
 ## Contents of `/images/`
 * chi-covid-chg-cases.png - Chicago Metro per capita case count
+* college-covid-chg-cases.png - 4-year college counties per capita case count
 * il-covid-cases.png - Cumulative cases
 * il-covid-chg-cases.png - Daily cases
 * il-covid-deaths.png - Cumulative deaths
