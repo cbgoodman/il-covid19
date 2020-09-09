@@ -18,7 +18,7 @@ All data are sourced from the Illinois Department of Public Health [https://dph.
 ![change in cma covid-19 case count](images/chi-covid-chg-cases.png)
 
 ### Daily case count and 7-day moving average, 4-year public higher education hosting counties
-![change in cma covid-19 case count](images/chi-covid-chg-cases.png)
+![change in cma covid-19 case count](images/college-covid-chg-cases.png)
 
 ## Data files
 There are two files from which all the above visualizations are made. The variable metadata can be found below. The first four or five variables are direct imports from IDPH.
