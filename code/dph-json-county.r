@@ -145,7 +145,7 @@ county_data <- bind_cols(json_dates, json_values)  %>%
       lag(confirmed_cases, n = 6, order_by = testDate)
     )/7,
     across(confirmed_cases:deaths, ~.x - lag(.x, order_by = testDate), .names = "daily_{col}"),
-    daily_confirmed_cases_pc = daily_confirmed_cases/population,
+    daily_confirmed_cases_pc = daily_confirmed_cases/(population/100),
     daily_confirmed_cases_pc_7day_ma = (
       daily_confirmed_cases_pc +
       lag(daily_confirmed_cases_pc, order_by = testDate) +
@@ -155,7 +155,7 @@ county_data <- bind_cols(json_dates, json_values)  %>%
       lag(daily_confirmed_cases_pc, n = 5, order_by = testDate) +
       lag(daily_confirmed_cases_pc, n = 6, order_by = testDate)
     )/7,
-    daily_deaths_pc = daily_deaths/population,
+    daily_deaths_pc = daily_deaths/(population/100),
     daily_deaths_pc_7day_ma = (
       daily_deaths_pc +
       lag(daily_deaths_pc, order_by = testDate) +
@@ -174,7 +174,16 @@ county_data <- bind_cols(json_dates, json_values)  %>%
       lag(daily_positive_rate, n = 4, order_by = testDate) +
       lag(daily_positive_rate, n = 5, order_by = testDate) +
       lag(daily_positive_rate, n = 6, order_by = testDate)
-    )/7
+    )/7,
+    weekly_cases_pc = (
+      daily_confirmed_cases +
+      lag(daily_confirmed_cases, order_by = testDate) +
+      lag(daily_confirmed_cases, n = 2, order_by = testDate) +
+      lag(daily_confirmed_cases, n = 3, order_by = testDate) +
+      lag(daily_confirmed_cases, n = 4, order_by = testDate) +
+      lag(daily_confirmed_cases, n = 5, order_by = testDate) +
+      lag(daily_confirmed_cases, n = 6, order_by = testDate)
+    )/(population/100)
   ) %>%
   ungroup()
 
@@ -183,7 +192,7 @@ write_csv(x = select(
   county_data,
   -c(confirmed_cases_7day_ma, daily_confirmed_cases_pc, daily_confirmed_cases_pc_7day_ma,
     daily_deaths_pc, daily_deaths_pc_7day_ma, daily_positive_rate,
-    daily_positive_rate_7day_ma)
+    daily_positive_rate_7day_ma, weekly_cases_pc)
   ),
     path = "il-covid-county.csv"
   )
@@ -207,7 +216,7 @@ ggplot() +
 # Theming
 labs(
   title="Chicago Region COVID-19 Case Count",
-  subtitle=str_glue("Number of confirmed cases per 1,000 residents and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Number of confirmed cases per 100,000 residents and 7-day moving average, as of {today}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
@@ -271,7 +280,7 @@ ggplot() +
 # Theming
 labs(
   title="Illinois 4-Year State University Counties COVID-19 Case Count",
-  subtitle=str_glue("Number of confirmed cases per 1,000 residents and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Number of confirmed cases per 100,000 residents and 7-day moving average, as of {today}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
