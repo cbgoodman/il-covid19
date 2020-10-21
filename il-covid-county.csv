@@ -1,5 +1,5 @@
 testDate,County,confirmed_cases,total_tested,deaths,population,daily_confirmed_cases,daily_total_tested,daily_deaths
-2020-10-20,Illinois,350875,6883314,9277,12671.821,3714,59077,41
+2020-10-20,Illinois,350875,6883314,9276,12671.821,3714,59077,40
 2020-10-20,Adams,1659,36773,15,65.435,26,151,0
 2020-10-20,Alexander,109,2292,1,5.761,1,6,0
 2020-10-20,Bond,471,7388,9,16.426,5,69,0
@@ -81,7 +81,7 @@ testDate,County,confirmed_cases,total_tested,deaths,population,daily_confirmed_c
 2020-10-20,Pulaski,226,1887,1,5.335,0,15,0
 2020-10-20,Putnam,86,1488,0,5.739,1,9,0
 2020-10-20,Randolph,1159,14556,14,31.782,14,96,0
-2020-10-20,Richland,318,7534,15,15.513,1,46,1
+2020-10-20,Richland,318,7534,14,15.513,1,46,0
 2020-10-20,Rock Island,3721,70270,89,141.879,51,610,1
 2020-10-20,Saline,505,7896,7,23.491,2,48,0
 2020-10-20,Sangamon,3556,125280,60,194.672,81,1035,6
