@@ -209,7 +209,7 @@ ggplot() +
   geom_line(aes(y=daily_confirmed_cases_pc_7day_ma, x = ymd(testDate)), size = 0.5, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
-    date_breaks = "2 weeks",
+    date_breaks = "1 month",
     expand = c(0,0.5)
   ) +
   scale_y_continuous(labels = comma) +
@@ -273,7 +273,7 @@ ggplot() +
   geom_line(aes(y=daily_confirmed_cases_pc_7day_ma, x = ymd(testDate)), size = 0.5, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
-    date_breaks = "2 weeks",
+    date_breaks = "1 month",
     expand = c(0,0.5)
   ) +
   scale_y_continuous(labels = comma) +
