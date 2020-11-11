@@ -25,7 +25,7 @@ today <- format(today,"%B %d, %Y")
 county_data <- bind_cols(json_dates, json_values)  %>%
   unnest_wider(values) %>%
   select(-c(lat,lon,negative)) %>%
-  unnest(c(County, confirmed_cases, total_tested, deaths)) %>%
+  unnest(c(County, confirmed_cases, total_tested, deaths, probable_deaths)) %>%
   mutate(
     population = case_when(
       County == "Illinois" ~ 12671.821,
