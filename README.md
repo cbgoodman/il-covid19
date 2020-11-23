@@ -20,6 +20,18 @@ All data are sourced from the Illinois Department of Public Health [https://dph.
 ### Daily case count and 7-day moving average, 4-year public higher education hosting counties
 ![change in cma covid-19 case count](images/college-covid-chg-cases.png)
 
+### Hospital bed utilization and 7-day moving average
+![hospital beds in use for COVID](images/hospitalization.png)
+
+### Hospital bed utilization rate and 7-day moving average
+![hospital beds in use for COVID divided by total hospital beds](images/hospital_util_rate.png)
+
+### ICU bed utilization and 7-day moving average
+![icu beds in use for COVID](images/icu.png)
+
+### ICU bed utilization rate and 7-day moving average
+![icu beds in use for COVID divided by total icu beds](images/icu_util_rate.png)
+
 ## Data files
 There are two files from which all the above visualizations are made. The variable metadata can be found below. The first four or five variables are direct imports from IDPH.
 
@@ -54,6 +66,10 @@ There are two files from which all the above visualizations are made. The variab
 ## Contents of `/images/`
 * chi-covid-chg-cases.png - Chicago Metro per capita case count
 * college-covid-chg-cases.png - 4-year college counties per capita case count
+* hospital_util_rate.png - Percent usage of hospital beds for COVID-19
+* hospitalization.png - Total hospital beds in use for COVID-19
+* icu_util_rate.png - Percent usage of ICU beds for COVID-19
+* icu.png - Total ICU beds in use for COVID-19
 * il-covid-cases.png - Cumulative cases
 * il-covid-chg-cases.png - Daily cases
 * il-covid-deaths.png - Cumulative deaths
