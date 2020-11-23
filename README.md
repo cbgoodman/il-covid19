@@ -58,6 +58,7 @@ There are two files from which all the above visualizations are made. The variab
 
 ## Contents of `/code/`
 * `dph-json-county.r` - Creates county-level dataset and creates Chicago Metro histogram.
+* `dph-json-hospitalization.r` - Creates two histograms and two line graphs plotting hospital and ICU bed usage and utilization.
 * `dph-json-state.r` - Master file to create manipulate DPH json, format data.
   * `il-covid-cases.r` - Creates two histograms, one of total cases and one of daily cases.
   * `il-covid-deaths.r` - Creates two histograms, one of total deaths and one of daily deaths.
