@@ -75,7 +75,7 @@ ggplot() +
   scale_y_continuous(labels = comma) +
 # Theming
 labs(
-  title="Hospital utilization in on the rise in Illinois",
+  title="Hospital utilization in Illinois",
   subtitle=str_glue("Total hospital beds in use by COVID-19 patients and 7-day moving average, as of {today}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
@@ -125,7 +125,7 @@ ggplot() +
   scale_y_continuous(labels = percent) +
 # Theming
 labs(
-  title="Hospital utilization rate in on the rise in Illinois",
+  title="Hospital utilization rate in Illinois",
   subtitle=str_glue("Total hospital beds in use by COVID-19 patients divided by total hospital beds (orange) and 7-day moving average (grey), as of {today}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
@@ -175,7 +175,7 @@ ggplot() +
   scale_y_continuous(labels = comma) +
 # Theming
 labs(
-  title="ICU utilization in on the rise in Illinois",
+  title="ICU utilization in Illinois",
   subtitle=str_glue("Total ICU beds in use by COVID-19 patients and 7-day moving average, as of {today}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
@@ -225,7 +225,7 @@ ggplot() +
   scale_y_continuous(labels = percent) +
 # Theming
 labs(
-  title="ICU utilization rate at near record highs in Illinois",
+  title="ICU utilization rate in Illinois",
   subtitle=str_glue("Total ICU beds in use by COVID-19 patients divided by total ICU beds (orange) and 7-day moving average (grey), as of {today}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
