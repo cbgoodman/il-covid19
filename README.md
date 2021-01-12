@@ -32,6 +32,9 @@ All data are sourced from the Illinois Department of Public Health [https://dph.
 ### ICU bed utilization rate and 7-day moving average
 ![icu beds in use for COVID divided by total icu beds](images/icu_util_rate.png)
 
+### Daily count of OVID-19 vaccine doses administered
+![covid-19 vaccine doses administered](images/l-administeredcount.png)
+
 ## Data files
 There are two files from which all the above visualizations are made. The variable metadata can be found below. The first four or five variables are direct imports from IDPH.
 
@@ -63,6 +66,7 @@ There are two files from which all the above visualizations are made. The variab
   * `il-covid-cases.r` - Creates two histograms, one of total cases and one of daily cases.
   * `il-covid-deaths.r` - Creates two histograms, one of total deaths and one of daily deaths.
   * `il-testing.r` - Creates two histograms and one line graph, total tests conducted, daily tests conducted, and positive rate over time.
+* `dph-vaccine.r` - Creates a bar chart of daily COVID-19 vaccine doses administered.
 
 ## Contents of `/images/`
 * chi-covid-chg-cases.png - Chicago Metro per capita case count
@@ -71,6 +75,7 @@ There are two files from which all the above visualizations are made. The variab
 * hospitalization.png - Total hospital beds in use for COVID-19
 * icu_util_rate.png - Percent usage of ICU beds for COVID-19
 * icu.png - Total ICU beds in use for COVID-19
+* il-administeredcount.png - COVID-19 vaccine doses administered
 * il-covid-cases.png - Cumulative cases
 * il-covid-chg-cases.png - Daily cases
 * il-covid-deaths.png - Cumulative deaths
