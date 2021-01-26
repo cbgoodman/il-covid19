@@ -32,8 +32,8 @@ All data are sourced from the Illinois Department of Public Health [https://dph.
 ### ICU bed utilization rate and 7-day moving average
 ![icu beds in use for COVID divided by total icu beds](images/icu_util_rate.png)
 
-### Daily count of OVID-19 vaccine doses administered
-![covid-19 vaccine doses administered](images/l-administeredcount.png)
+### Daily count of COVID-19 vaccine doses administered
+![covid-19 vaccine doses administered](images/il-administeredcount.png)
 
 ## Data files
 There are two files from which all the above visualizations are made. The variable metadata can be found below. The first four or five variables are direct imports from IDPH.
