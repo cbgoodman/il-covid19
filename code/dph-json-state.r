@@ -4,14 +4,13 @@ library(scales)
 library(lubridate)
 
 # Read in state-level data from DPH json file
-table <- fromJSON("https://dph.illinois.gov//sitefiles/COVIDHistoricalTestResults.json")
-state <- table[["state_testing_results"]]
-stateDF <- do.call(rbind.data.frame, state)
+table <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetIllinoisCases")
+stateDF <- as_tibble(table)
 
 # Generate lags, change in vars, 7-day moving average
 stateDF <- stateDF %>%
   mutate(
-    testDate = mdy(testDate),
+    testDate = ymd_hms(testDate),
     confirmed_cases_7day_ma = (
       confirmed_cases +
       lag(confirmed_cases, order_by = testDate) +

@@ -6,10 +6,11 @@ library(lubridate)
 
 # Read in hospitalization data from DPH json file
 json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults")
+json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetHospitalUtilizationResults")
 # Save statewide date
 json_data <- as_tibble(json$HospitalUtilizationResults)
 # Create variables
-json_data <- json_data %>%
+json_data <- json %>%
   mutate (
     ReportDate = ymd_hms(ReportDate),
     TotalInUseBedsCOVID_7day_ma = (
@@ -53,11 +54,8 @@ json_data <- json_data %>%
   )
 
 
-json_dates <- as_tibble(json$lastUpdatedDate)
-json_dates$date <- paste(json_dates$year, json_dates$month, json_dates$day, sep="-") %>%
-  ymd()%>%
-  as.Date()
-today <- ymd(json_dates$date)
+json_dates <- json %>% select(ReportDate) %>% mutate(ReportDate = ymd_hms(ReportDate))
+today <- ymd(max(json_dates$ReportDate))
 today <- format(today,"%B %d, %Y")
 
 # Hospitalization

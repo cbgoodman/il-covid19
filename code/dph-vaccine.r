@@ -4,38 +4,33 @@ library(reshape2)
 library(scales)
 library(lubridate)
 
-json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/covidvaccine/getVaccineAdministration?countyName")
+json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?countyname=")
 
-json_data <- as_tibble(json$VaccineAdministration)
-
-json_dates <- as_tibble(json$lastUpdatedDate)
-json_dates$date <- paste(json_dates$year, json_dates$month, json_dates$day, sep="-") %>%
-  ymd()%>%
-  as.Date()
-today <- ymd(json_dates$date)
+json_dates <- json %>% select(Report_Date) %>% mutate(Report_Date = ymd_hms(Report_Date))
+today <- ymd(max(json_dates$Report_Date))
 today <- format(today,"%B %d, %Y")
 
-statewide_vaccine <- json_data %>%
+statewide_vaccine <- json %>%
   mutate(
-  ReportDate = ymd_hms(Report_Date),
+  Report_Date = ymd_hms(Report_Date),
   AdministeredCountChange_7day_ma = (
     AdministeredCountChange +
-    lag(AdministeredCountChange, order_by = ReportDate) +
-    lag(AdministeredCountChange, n = 2, order_by = ReportDate) +
-    lag(AdministeredCountChange, n = 3, order_by = ReportDate) +
-    lag(AdministeredCountChange, n = 4, order_by = ReportDate) +
-    lag(AdministeredCountChange, n = 5, order_by = ReportDate) +
-    lag(AdministeredCountChange, n = 6, order_by = ReportDate)
+    lag(AdministeredCountChange, order_by = Report_Date) +
+    lag(AdministeredCountChange, n = 2, order_by = Report_Date) +
+    lag(AdministeredCountChange, n = 3, order_by = Report_Date) +
+    lag(AdministeredCountChange, n = 4, order_by = Report_Date) +
+    lag(AdministeredCountChange, n = 5, order_by = Report_Date) +
+    lag(AdministeredCountChange, n = 6, order_by = Report_Date)
   )/7
 )
 
 # Administered Doses
 statewide_vaccine %>%
 ggplot() +
-  geom_bar(aes(y = AdministeredCountChange, x = ymd(ReportDate)), stat="identity", fill="#E69F00") +
+  geom_bar(aes(y = AdministeredCountChange, x = ymd(Report_Date)), stat="identity", fill="#E69F00") +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
   #family="Public Sans Thin", lineheight=0.95, size=2, color="#2b2b2b") +
-  geom_line(aes(y=AdministeredCountChange_7day_ma, x = ymd(ReportDate)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=AdministeredCountChange_7day_ma, x = ymd(Report_Date)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "3 days",
