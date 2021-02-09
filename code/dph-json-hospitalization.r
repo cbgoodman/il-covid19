@@ -5,7 +5,7 @@ library(scales)
 library(lubridate)
 
 # Read in hospitalization data from DPH json file
-json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults")
+#json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults")
 json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetHospitalUtilizationResults")
 # Save statewide date
 json_data <- as_tibble(json$HospitalUtilizationResults)
