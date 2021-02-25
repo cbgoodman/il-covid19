@@ -4,7 +4,7 @@ code/dph-borders.r
 code/dph-json-county-heatmap.r
 code/dph-json-zip.r
 code/dph-json-region.r
-images/covid-heatmap.ong
+images/covid-heatmap.png
 images/chi-covid-chg-deaths.png
 images/chi-covid-positivity.png
 images/regional-positivity-rate.png
