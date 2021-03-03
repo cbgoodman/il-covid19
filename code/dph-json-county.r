@@ -525,92 +525,92 @@ ggsave("college-covid-chg-cases.png", path="./images", width=10, height=8, units
 # Experimental
 #########################
 # Create weekly data to mirror state community spread data
-weekly_data <- county_data %>%
-  select(testDate, County, daily_confirmed_cases, daily_total_tested, daily_deaths, population) %>%
-  mutate(
-    week = epiweek(testDate),
-    week_date = paste(
-      floor_date(testDate, unit = "weeks"), "-", ceiling_date(testDate, unit = "weeks")-1
-    )
-  ) %>%
-  group_by(County, week) %>%
-  mutate(
-    daily_confirmed_cases = if_else(daily_confirmed_cases < 0,0, as.numeric(daily_confirmed_cases)),
-    daily_total_tested = as.numeric(daily_total_tested),
-    daily_deaths = as.numeric(daily_deaths),
-    County = as.factor(County)
-  ) %>%
-  summarize(
-    weekly_confirmed_cases = sum(daily_confirmed_cases),
-    weekly_total_tested = sum(daily_total_tested),
-    weekly_deaths = sum(daily_deaths),
-    population = first(population),
-    week_date = first(week_date)
-  ) %>%
-  mutate(
-    weekly_confirmed_cases_pc = weekly_confirmed_cases/(population/100),
-    weekly_chg_deaths = weekly_deaths-lag(weekly_deaths, order_by = week),
-    weekly_positive_rate = weekly_confirmed_cases/weekly_total_tested,
-    cases_target = case_when(weekly_confirmed_cases_pc<=50 ~ "Target", TRUE ~ "Warning"),
-    deaths_target = case_when(weekly_chg_deaths<= 0 ~ "Target", TRUE ~ "Warning"),
-    positve_target = case_when(weekly_positive_rate<=0.08 ~ "Target", TRUE ~ "Warning")
-  ) %>%
-  ungroup() %>%
-  mutate(
-    County=reorder_within(County,-weekly_confirmed_cases_pc, week)
-  )
-
-weekly_data %>%
-  filter(!County %in% c("Illinois", "Suburban Cook", "Out Of State", "Unassigned")) %>%
-  filter(
-    week == max(week)-1 |
-    week == max(week)-2 |
-    week == max(week)-3 |
-    week == max(week)-4 |
-    week == max(week)-5 |
-    week == max(week)-6
-  ) %>%
-  ggplot() +
-  geom_bar(
-    aes(y = weekly_confirmed_cases_pc, x = County, fill = as.factor(cases_target)),
-    stat="identity",
-    width = 0.75,
-    position = position_dodge(width = 1)
-  ) +
-  scale_y_continuous(labels = comma) +
-  facet_wrap(~week_date, nrow=2, scales = "free_x") +
-  # Theming
-  labs(
-    title="Illinois 4-Year State University Counties COVID-19 Case Count",
-    subtitle=str_glue("Number of confirmed cases per 100,000 residents and 7-day moving average, as of {today}"),
-    caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
-    y=NULL,
-    x=NULL) +
-  theme_minimal(base_family="Public Sans Thin") +
-  # light, dotted major y-grid lines only
-  theme(panel.grid=element_line())+
-  theme(panel.grid.major.y=element_line(color="#2b2b2b", linetype="dotted", size=0.15))+
-  theme(panel.grid.major.x=element_blank())+
-  theme(panel.grid.minor.x=element_blank())+
-  theme(panel.grid.minor.y=element_blank())+
-  # light x-axis line only
-  theme(axis.line=element_line())+
-  theme(axis.line.y=element_blank())+
-  theme(axis.line.x=element_blank())+
-  # tick styling
-  theme(axis.ticks=element_line())+
-  theme(axis.ticks.x=element_blank())+
-  theme(axis.ticks.y=element_blank())+
-  theme(axis.ticks.length=unit(5, "pt"))+
-  # x-axis labels
-  theme(axis.text.x=element_blank())+
-  # breathing room for the plot
-  theme(plot.margin=unit(rep(0.5, 4), "cm"))+
-  # move the y-axis tick labels over a bit
-  #theme(axis.text.y=element_text(margin=margin(r=-5)))+
-  #theme(axis.text.x=element_text(margin=margin(r=-5)))+
-  # make the plot title bold and modify the bottom margin a bit
-  theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=margin(b=15)))+
-  # make the subtitle italic
-  theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
-  theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
+#weekly_data <- county_data %>%
+#  select(testDate, County, daily_confirmed_cases, daily_total_tested, daily_deaths, population) %>%
+#  mutate(
+#    week = epiweek(testDate),
+#    week_date = paste(
+#      floor_date(testDate, unit = "weeks"), "-", ceiling_date(testDate, unit = "weeks")-1
+#    )
+#  ) %>%
+#  group_by(County, week) %>%
+#  mutate(
+#    daily_confirmed_cases = if_else(daily_confirmed_cases < 0,0, as.numeric(daily_confirmed_cases)),
+#    daily_total_tested = as.numeric(daily_total_tested),
+#    daily_deaths = as.numeric(daily_deaths),
+#    County = as.factor(County)
+#  ) %>%
+#  summarize(
+#    weekly_confirmed_cases = sum(daily_confirmed_cases),
+#    weekly_total_tested = sum(daily_total_tested),
+#    weekly_deaths = sum(daily_deaths),
+#    population = first(population),
+#    week_date = first(week_date)
+#  ) %>%
+#  mutate(
+#    weekly_confirmed_cases_pc = weekly_confirmed_cases/(population/100),
+#    weekly_chg_deaths = weekly_deaths-lag(weekly_deaths, order_by = week),
+#    weekly_positive_rate = weekly_confirmed_cases/weekly_total_tested,
+#    cases_target = case_when(weekly_confirmed_cases_pc<=50 ~ "Target", TRUE ~ "Warning"),
+#    deaths_target = case_when(weekly_chg_deaths<= 0 ~ "Target", TRUE ~ "Warning"),
+#    positve_target = case_when(weekly_positive_rate<=0.08 ~ "Target", TRUE ~ "Warning")
+#  ) %>%
+#  ungroup() %>%
+#  mutate(
+#    County=reorder_within(County,-weekly_confirmed_cases_pc, week)
+#  )
+#
+#weekly_data %>%
+#  filter(!County %in% c("Illinois", "Suburban Cook", "Out Of State", "Unassigned")) %>%
+#  filter(
+#    week == max(week)-1 |
+#    week == max(week)-2 |
+#    week == max(week)-3 |
+#    week == max(week)-4 |
+#    week == max(week)-5 |
+#    week == max(week)-6
+#  ) %>%
+#  ggplot() +
+#  geom_bar(
+#    aes(y = weekly_confirmed_cases_pc, x = County, fill = as.factor(cases_target)),
+#    stat="identity",
+#    width = 0.75,
+#    position = position_dodge(width = 1)
+#  ) +
+#  scale_y_continuous(labels = comma) +
+#  facet_wrap(~week_date, nrow=2, scales = "free_x") +
+#  # Theming
+#  labs(
+#    title="Illinois 4-Year State University Counties COVID-19 Case Count",
+#    subtitle=str_glue("Number of confirmed cases per 100,000 residents and 7-day moving average, as of {today}"),
+#    caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
+#    y=NULL,
+#    x=NULL) +
+#  theme_minimal(base_family="Public Sans Thin") +
+#  # light, dotted major y-grid lines only
+#  theme(panel.grid=element_line())+
+#  theme(panel.grid.major.y=element_line(color="#2b2b2b", linetype="dotted", size=0.15))+
+#  theme(panel.grid.major.x=element_blank())+
+#  theme(panel.grid.minor.x=element_blank())+
+#  theme(panel.grid.minor.y=element_blank())+
+#  # light x-axis line only
+#  theme(axis.line=element_line())+
+#  theme(axis.line.y=element_blank())+
+#  theme(axis.line.x=element_blank())+
+#  # tick styling
+#  theme(axis.ticks=element_line())+
+#  theme(axis.ticks.x=element_blank())+
+#  theme(axis.ticks.y=element_blank())+
+#  theme(axis.ticks.length=unit(5, "pt"))+
+#  # x-axis labels
+#  theme(axis.text.x=element_blank())+
+#  # breathing room for the plot
+#  theme(plot.margin=unit(rep(0.5, 4), "cm"))+
+#  # move the y-axis tick labels over a bit
+#  #theme(axis.text.y=element_text(margin=margin(r=-5)))+
+#  #theme(axis.text.x=element_text(margin=margin(r=-5)))+
+#  # make the plot title bold and modify the bottom margin a bit
+#  theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=margin(b=15)))+
+#  # make the subtitle italic
+#  theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
+#  theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
