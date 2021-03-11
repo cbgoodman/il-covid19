@@ -217,7 +217,7 @@ ggplot() +
   geom_line(aes(y=icuutilizationCOVID_7day_ma, x = ymd(ReportDate)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
-    date_breaks = "1 month,
+    date_breaks = "1 month",
     expand = c(0,0.5)
   ) +
   scale_y_continuous(labels = percent) +
