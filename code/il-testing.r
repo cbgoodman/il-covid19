@@ -9,7 +9,7 @@ il.tested <- ggplot(stateDF) +
   geom_line(aes(y=total_tested_7day_ma, x = ymd(testDate)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
-    date_breaks = "1 week",
+    date_breaks = "1 month",
     expand = c(0,0)
   ) +
   scale_y_continuous(labels = comma) +
@@ -59,7 +59,7 @@ il.chg.tested <- ggplot(stateDF) +
   geom_line(aes(y=daily_total_tested_7day_ma, x = ymd(testDate)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
-    date_breaks = "1 week",
+    date_breaks = "1 month",
     expand = c(0,0)
   ) +
   scale_y_continuous(labels = comma) +
@@ -106,7 +106,7 @@ il.positive <- ggplot(stateDF) +
   geom_line(aes(y=daily_positive_rate_7day_ma, x = ymd(testDate)), color = "#7F7F7F") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
-    date_breaks = "1 week",
+    date_breaks = "1 month",
     expand = c(0,0)
   ) +
   scale_y_continuous(labels = scales::percent, limits = c(0,1)) +
