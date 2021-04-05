@@ -67,8 +67,8 @@ There are two files from which all the above visualizations are made. The variab
   * `AdministeredCount` - Total number of reported vaccine doses administered
   * `AdministeredCountChange` - Number of reported vaccine doses administered on `Report_Date`
   * `AdministedCountRollAvg` - 7-day moving average of `AdministeredCountChange`
-  * `PersonsFullyVaccinated` - Number of individuals full vaccinated (two-dose (Moderna/Pfizer) or one-dose (J&J))
-  * `PctVaccinatedPopulation` - Percent o the population `PersonsFullyVaccinated`
+  * `PersonsFullyVaccinated` - Number of individuals fully vaccinated (two-dose (Moderna/Pfizer) or one-dose (J&J))
+  * `PctVaccinatedPopulation` - Percent of the population `PersonsFullyVaccinated`
 
 ## Contents of `/code/`
 * `dph-json-county.r` - Creates county-level dataset and creates Chicago Metro histogram.
