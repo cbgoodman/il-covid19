@@ -228,6 +228,7 @@ rename(
 ) %>%
 select(-c(latitude,longitude)) %>%
 mutate(
+  # 2020 Census Population Estimates
   population = case_when(
     County == "Illinois" ~ 12587.53,
     County == "Adams" ~ 64.783,
