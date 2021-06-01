@@ -401,7 +401,7 @@ write_csv(x = select(
     daily_deaths_pc, daily_deaths_pc_7day_ma, daily_positive_rate,
     daily_positive_rate_7day_ma, weekly_cases_pc)
   ),
-    path = "il-covid-county.csv"
+    file = "il-covid-county.csv"
   )
 
 # CMA Daily case count

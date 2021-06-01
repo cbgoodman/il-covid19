@@ -348,7 +348,7 @@ write_csv(x = select(
   county_vaccine_data,
   -c(population, AdministeredPop, AdministeredPop_7day_ma)
   ),
-    path = "il-covid-vaccine-county.csv"
+    file = "il-covid-vaccine-county.csv"
   )
 
 # Set today's date

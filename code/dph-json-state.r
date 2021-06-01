@@ -94,7 +94,7 @@ write_csv(x = select(
     daily_confirmed_cases_7day_ma, daily_deaths_7day_ma, daily_total_tested_7day_ma,
     daily_positive_rate, daily_positive_rate_7day_ma)
   ),
-  path = "il-covid.csv")
+  file = "il-covid.csv")
 
 # Create graphics
 source("./code/il-covid-cases.r")
