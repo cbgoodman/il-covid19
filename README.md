@@ -3,6 +3,8 @@
 * Last updated: `2021-06-18`
 * Jump to: [`Data files`](#data-files) [`code`](#contents-of-code) [`images`](#images)
 
+---
+
 All data are sourced from the Illinois Department of Public Health [https://dph.illinois.gov/covid19](https://dph.illinois.gov/covid19).
 
 ### Daily case count and 7-day moving average
