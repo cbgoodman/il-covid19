@@ -106,7 +106,7 @@ theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=mar
 # make the subtitle italic
 theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
 theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
-ggsave("hospitalization.png", path="./images", width=10, height=8, units="in", dpi="retina")
+ggsave("hospitalization.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")
 
 # Hospital Utilization Rate
 json_data %>%
@@ -156,7 +156,7 @@ theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=mar
 # make the subtitle italic
 theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
 theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
-ggsave("hospital_util_rate.png", path="./images", width=10, height=8, units="in", dpi="retina")
+ggsave("hospital_util_rate.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")
 
 # ICU Usage
 json_data %>%
@@ -206,7 +206,7 @@ theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=mar
 # make the subtitle italic
 theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
 theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
-ggsave("icu.png", path="./images", width=10, height=8, units="in", dpi="retina")
+ggsave("icu.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")
 
 # ICU Utilization Rate
 json_data %>%
@@ -256,4 +256,4 @@ theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=mar
 # make the subtitle italic
 theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
 theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
-ggsave("icu_util_rate.png", path="./images", width=10, height=8, units="in", dpi="retina")
+ggsave("icu_util_rate.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")

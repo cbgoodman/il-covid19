@@ -48,7 +48,7 @@ theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=mar
 # make the subtitle italic
 theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
 theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
-ggsave(plot=il.deaths, "il-covid-deaths.png", path="./images", width=10, height=6, units="in", dpi="retina")
+ggsave(plot=il.deaths, "il-covid-deaths.png", path="./images", width=10, height=6, units="in", dpi="retina", bg = "#ffffff")
 
 
 # Change in Cases plot
@@ -98,4 +98,4 @@ theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=mar
 # make the subtitle italic
 theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
 theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
-ggsave(plot=il.chg.deaths, "il-covid-chg-deaths.png", path="./images", width=10, height=6, units="in", dpi="retina")
+ggsave(plot=il.chg.deaths, "il-covid-chg-deaths.png", path="./images", width=10, height=6, units="in", dpi="retina", bg = "#ffffff")

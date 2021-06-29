@@ -456,7 +456,7 @@ theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=mar
 # make the subtitle italic
 theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
 theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
-ggsave("chi-covid-chg-cases.png", path="./images", width=10, height=8, units="in", dpi="retina")
+ggsave("chi-covid-chg-cases.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")
 
 unis <- c(
   "Coles County\nEastern Illinois University",
@@ -520,7 +520,7 @@ theme(plot.title=element_text(family="Public Sans SemiBold", size=11, margin=mar
 # make the subtitle italic
 theme(plot.subtitle=element_text(family="Public Sans Italic", size=9))+
 theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
-ggsave("college-covid-chg-cases.png", path="./images", width=10, height=8, units="in", dpi="retina")
+ggsave("college-covid-chg-cases.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")
 
 #########################
 # Experimental
