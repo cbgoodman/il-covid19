@@ -61,10 +61,10 @@ today <- format(today,"%B %d, %Y")
 # Hospitalization
 json_data %>%
 ggplot() +
-  geom_bar(aes(y = TotalInUseBedsCOVID, x = ymd(ReportDate)), stat="identity", fill="#E69F00") +
+  geom_bar(aes(y = TotalInUseBedsCOVID, x = ymd(ReportDate)), stat="identity", color=NA, fill="#617A89", alpha = 0.25) +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
   #family="Public Sans Thin", lineheight=0.95, size=2, color="#2b2b2b") +
-  geom_line(aes(y=TotalInUseBedsCOVID_7day_ma, x = ymd(ReportDate)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=TotalInUseBedsCOVID_7day_ma, x = ymd(ReportDate)), size = 1, na.rm = TRUE, color = "#617A89") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "1 month",
@@ -161,10 +161,10 @@ ggsave("hospital_util_rate.png", path="./images", width=10, height=8, units="in"
 # ICU Usage
 json_data %>%
 ggplot() +
-  geom_bar(aes(y = ICUInUseBedsCOVID, x = ymd(ReportDate)), stat="identity", fill="#E69F00") +
+  geom_bar(aes(y = ICUInUseBedsCOVID, x = ymd(ReportDate)), stat="identity", color=NA, fill="#617A89", alpha = 0.25) +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
   #family="Public Sans Thin", lineheight=0.95, size=2, color="#2b2b2b") +
-  geom_line(aes(y=ICUInUseBedsCOVID_7day_ma, x = ymd(ReportDate)), size = 1, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=ICUInUseBedsCOVID_7day_ma, x = ymd(ReportDate)), size = 1, na.rm = TRUE, color = "#617A89") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "1 month",

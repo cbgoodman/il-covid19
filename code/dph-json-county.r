@@ -410,10 +410,10 @@ county_data %>%
   filter(County %in% c("Chicago", "Cook", "DuPage", "Kane", "Kendall", "McHenry", "Lake", "Will")) %>%
   filter(daily_confirmed_cases > 0 ) %>%
 ggplot() +
-  geom_bar(aes(y = daily_confirmed_cases_pc, x = ymd(testDate)), stat="identity", position = position_dodge(width=1), fill="#E69F00") +
+  geom_bar(aes(y = daily_confirmed_cases_pc, x = ymd(testDate)), stat="identity", position = position_dodge(width=1), color=NA, fill="#617A89", alpha = 0.25) +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
   #family="Public Sans Thin", lineheight=0.95, size=2, color="#2b2b2b") +
-  geom_line(aes(y=daily_confirmed_cases_pc_7day_ma, x = ymd(testDate)), size = 0.5, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=daily_confirmed_cases_pc_7day_ma, x = ymd(testDate)), size = 0.5, na.rm = TRUE, color = "#617A89") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "3 months",
@@ -474,10 +474,10 @@ county_data %>%
   filter(County %in% c("Coles", "McLean", "Sangamon", "Champaign", "DeKalb", "Jackson", "Madison", "McDonough")) %>%
   filter(daily_confirmed_cases > 0 ) %>%
 ggplot() +
-  geom_bar(aes(y = daily_confirmed_cases_pc, x = ymd(testDate)), stat="identity", position = position_dodge(width=1), fill="#E69F00") +
+  geom_bar(aes(y = daily_confirmed_cases_pc, x = ymd(testDate)), stat="identity", position = position_dodge(width=1), color=NA, fill="#617A89", alpha = 0.25) +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
   #family="Public Sans Thin", lineheight=0.95, size=2, color="#2b2b2b") +
-  geom_line(aes(y=daily_confirmed_cases_pc_7day_ma, x = ymd(testDate)), size = 0.5, na.rm = TRUE, color = "#7F7F7F") +
+  geom_line(aes(y=daily_confirmed_cases_pc_7day_ma, x = ymd(testDate)), size = 0.5, na.rm = TRUE, color = "#617A89") +
   scale_x_date(
     date_labels = "%Y-%m-%d",
     date_breaks = "3 months",
