@@ -218,15 +218,15 @@ county_data <- bind_rows(
   woodford
 ) %>%
 rename(
-   testDate = values.reportDate,
+   testDate = values.ReportDate,
    County = values.CountyName,
-   confirmed_cases = values.confirmed_cases,
-   tested = values.tested,
-   deaths = values.deaths,
-   latitude = values.latitude,
-   longitude = values.longitude
+   confirmed_cases = values.CumulativeCases,
+   tested = values.TotalTested,
+   deaths = values.Deaths,
+   #latitude = values.latitude,
+   #longitude = values.longitude
 ) %>%
-select(-c(latitude,longitude)) %>%
+#select(-c(latitude,longitude)) %>%
 mutate(
   # 2020 Census Population Estimates
   population = case_when(
@@ -348,7 +348,8 @@ mutate(
     lag(confirmed_cases, n = 5, order_by = testDate) +
     lag(confirmed_cases, n = 6, order_by = testDate)
   )/7,
-  across(tested:deaths, ~.x - lag(.x, order_by = testDate), .names = "daily_{col}"),
+  across(c(confirmed_cases, tested, deaths), ~.x - lag(.x, order_by = testDate), .names = "daily_{col}"),
+  #across(tested:deaths, ~.x - lag(.x, order_by = testDate), .names = "daily_{col}"),
   daily_confirmed_cases_pc = daily_confirmed_cases/(population/100),
   daily_confirmed_cases_pc_7day_ma = (
     daily_confirmed_cases_pc +
