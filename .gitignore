@@ -1,4 +1,5 @@
 .Rhistory
+.Rproj
 .DS_Store
 code/dph-borders.r
 code/dph-json-county-heatmap.r
@@ -8,3 +9,4 @@ images/covid-heatmap.png
 images/chi-covid-chg-deaths.png
 images/chi-covid-positivity.png
 images/regional-positivity-rate.png
+.Rproj.user
