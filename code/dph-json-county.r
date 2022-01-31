@@ -420,7 +420,10 @@ ggplot() +
     date_breaks = "3 months",
     expand = c(0,0.5)
   ) +
-  scale_y_continuous(labels = comma) +
+  scale_y_continuous(
+    labels = comma, 
+    limits = c(0,500)
+  ) +
   facet_wrap(~County, nrow=2) +
 # Theming
 labs(
