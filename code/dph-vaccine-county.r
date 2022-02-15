@@ -3,7 +3,7 @@ library(jsonlite)
 library(reshape2)
 library(scales)
 library(lubridate)
-library(tidytext)
+
 
 # Read in county-level data from DPH json file
 illinois <- data.frame(fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?countyname=Illinois"))
