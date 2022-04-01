@@ -1,6 +1,6 @@
 # Illinois COVID-19 Statistics
 
-* Last updated: `2021-06-18`
+* Last updated: `2022-04-01`
 * Jump to: [`Data files`](#data-files) [`code`](#contents-of-code) [`images`](#images)
 
 ---
