@@ -76,14 +76,22 @@ There are two files from which all the above visualizations are made. The variab
   * `PctVaccinatedPopulation` - Percent of the population `PersonsFullyVaccinated`
 
 ## Contents of `/code/`
-* `dph-json-county.r` - Creates county-level dataset and creates Chicago Metro histogram.
-* `dph-json-hospitalization.r` - Creates two histograms and two line graphs plotting hospital and ICU bed usage and utilization.
-* `dph-json-state.r` - Master file to create manipulate DPH json, format data.
+* `main.r` - The main file that loads packages, downloads data, processes the data, and created all graphics
+* `packages.r` - Loads required packages
+* `download.r` - downloads data require for visualizations  
+  * `download-county.r` - helper file to download county-level data
+  * `download-county-vax.r` - helper file to download county-level vaccination data
+* `process-data.r` - process downloaded data, exports some data to CSV
+* Visualization files
+  * `dph-json-region.r` - Creates a regional-level line graph of positive rate over time
+  * `dph-json-county.r` - Creates county-level dataset and creates Chicago Metro histogram.
+  * `dph-json-county-heatmap.r` - Creates county-level heatmap of cases.
+  * `dph-json-hospitalization.r` - Creates two histograms and two line graphs plotting hospital and ICU bed usage and utilization.
   * `il-covid-cases.r` - Creates two histograms, one of total cases and one of daily cases.
   * `il-covid-deaths.r` - Creates two histograms, one of total deaths and one of daily deaths.
-  * `il-testing.r` - Creates two histograms and one line graph, total tests conducted, daily tests conducted, and positive rate over time.
-* `dph-vaccine.r` - Creates a bar chart of daily COVID-19 vaccine doses administered.
-* `dph-vaccine-county.r` - Creates a bar chart of daily COVID-19 vaccine doses administered per capita by county.
+  * `il-testing.r` - Creates two histograms and one line graph, total tests conducted, daily tests conducted, and positive rate over  time.
+  * `dph-vaccine.r` - Creates a bar chart of daily COVID-19 vaccine doses administered.
+  * `dph-vaccine-county.r` - Creates a bar chart of daily COVID-19 vaccine doses administered per capita by county.
 
 ## Contents of `/images/`
 * chi-covid-chg-cases.png - Chicago Metro per capita case count

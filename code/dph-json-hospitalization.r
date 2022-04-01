@@ -1,65 +1,7 @@
-library(tidyverse)
-library(jsonlite)
-library(reshape2)
-library(scales)
-library(lubridate)
 
-# Read in hospitalization data from DPH json file
-#json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults")
-json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetHospitalUtilizationResults")
-# Save statewide date
-json_data <- as_tibble(json$HospitalUtilizationResults)
-# Create variables
-json_data <- json %>%
-  mutate (
-    ReportDate = ymd_hms(ReportDate),
-    TotalInUseBedsCOVID_7day_ma = (
-      TotalInUseBedsCOVID +
-      lag(TotalInUseBedsCOVID, order_by = ReportDate) +
-      lag(TotalInUseBedsCOVID, n = 2, order_by = ReportDate) +
-      lag(TotalInUseBedsCOVID, n = 3, order_by = ReportDate) +
-      lag(TotalInUseBedsCOVID, n = 4, order_by = ReportDate) +
-      lag(TotalInUseBedsCOVID, n = 5, order_by = ReportDate) +
-      lag(TotalInUseBedsCOVID, n = 6, order_by = ReportDate)
-    )/7,
-    ICUInUseBedsCOVID_7day_ma = (
-      ICUInUseBedsCOVID +
-      lag(ICUInUseBedsCOVID, order_by = ReportDate) +
-      lag(ICUInUseBedsCOVID, n = 2, order_by = ReportDate) +
-      lag(ICUInUseBedsCOVID, n = 3, order_by = ReportDate) +
-      lag(ICUInUseBedsCOVID, n = 4, order_by = ReportDate) +
-      lag(ICUInUseBedsCOVID, n = 5, order_by = ReportDate) +
-      lag(ICUInUseBedsCOVID, n = 6, order_by = ReportDate)
-    )/7,
-    hospitalutilizationCOVID = TotalInUseBedsCOVID/TotalBeds,
-    hospitalutilizationCOVID_7day_ma = (
-      hospitalutilizationCOVID +
-      lag(hospitalutilizationCOVID, order_by = ReportDate) +
-      lag(hospitalutilizationCOVID, n = 2, order_by = ReportDate) +
-      lag(hospitalutilizationCOVID, n = 3, order_by = ReportDate) +
-      lag(hospitalutilizationCOVID, n = 4, order_by = ReportDate) +
-      lag(hospitalutilizationCOVID, n = 5, order_by = ReportDate) +
-      lag(hospitalutilizationCOVID, n = 6, order_by = ReportDate)
-    )/7,
-    icuutilizationCOVID = ICUInUseBedsCOVID/ICUBeds,
-    icuutilizationCOVID_7day_ma = (
-      icuutilizationCOVID +
-      lag(icuutilizationCOVID, order_by = ReportDate) +
-      lag(icuutilizationCOVID, n = 2, order_by = ReportDate) +
-      lag(icuutilizationCOVID, n = 3, order_by = ReportDate) +
-      lag(icuutilizationCOVID, n = 4, order_by = ReportDate) +
-      lag(icuutilizationCOVID, n = 5, order_by = ReportDate) +
-      lag(icuutilizationCOVID, n = 6, order_by = ReportDate)
-    )/7
-  )
-
-
-json_dates <- json %>% select(ReportDate) %>% mutate(ReportDate = ymd_hms(ReportDate))
-today <- ymd(max(json_dates$ReportDate))
-today <- format(today,"%B %d, %Y")
 
 # Hospitalization
-json_data %>%
+hospitalization %>%
 ggplot() +
   geom_bar(aes(y = TotalInUseBedsCOVID, x = ymd(ReportDate)), stat="identity", color=NA, fill="#617A89", alpha = 0.25) +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
@@ -74,7 +16,7 @@ ggplot() +
 # Theming
 labs(
   title="Hospital utilization in Illinois",
-  subtitle=str_glue("Total hospital beds in use by COVID-19 patients and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Total hospital beds in use by COVID-19 patients and 7-day moving average, as of {today.hosp}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
@@ -109,7 +51,7 @@ theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
 ggsave("hospitalization.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")
 
 # Hospital Utilization Rate
-json_data %>%
+hospitalization %>%
 ggplot() +
   geom_line(aes(y = hospitalutilizationCOVID, x = ymd(ReportDate)), size = 1, na.rm = TRUE, color="#E69F00") +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
@@ -124,7 +66,7 @@ ggplot() +
 # Theming
 labs(
   title="Hospital utilization rate in Illinois",
-  subtitle=str_glue("Total hospital beds in use by COVID-19 patients divided by total hospital beds (orange) and 7-day moving average (grey), as of {today}"),
+  subtitle=str_glue("Total hospital beds in use by COVID-19 patients divided by total hospital beds (orange) and 7-day moving average (grey), as of {today.hosp}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
@@ -159,7 +101,7 @@ theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
 ggsave("hospital_util_rate.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")
 
 # ICU Usage
-json_data %>%
+hospitalization %>%
 ggplot() +
   geom_bar(aes(y = ICUInUseBedsCOVID, x = ymd(ReportDate)), stat="identity", color=NA, fill="#617A89", alpha = 0.25) +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
@@ -174,7 +116,7 @@ ggplot() +
 # Theming
 labs(
   title="ICU utilization in Illinois",
-  subtitle=str_glue("Total ICU beds in use by COVID-19 patients and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Total ICU beds in use by COVID-19 patients and 7-day moving average, as of {today.hosp}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
@@ -209,7 +151,7 @@ theme(plot.caption=element_text(size=8, hjust=0, margin=margin(t=15)))
 ggsave("icu.png", path="./images", width=10, height=8, units="in", dpi="retina", bg = "#ffffff")
 
 # ICU Utilization Rate
-json_data %>%
+hospitalization %>%
 ggplot() +
   geom_line(aes(y = icuutilizationCOVID, x = ymd(ReportDate)), size = 1, na.rm = TRUE, color ="#E69F00") +
   #geom_text(aes(y = cases, x = ymd(date), label = comma(cases, accuracy=1)), position=position_dodge(width=0.9), vjust=-0.25,
@@ -224,7 +166,7 @@ ggplot() +
 # Theming
 labs(
   title="ICU utilization rate in Illinois",
-  subtitle=str_glue("Total ICU beds in use by COVID-19 patients divided by total ICU beds (orange) and 7-day moving average (grey), as of {today}"),
+  subtitle=str_glue("Total ICU beds in use by COVID-19 patients divided by total ICU beds (orange) and 7-day moving average (grey), as of {today.hosp}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +

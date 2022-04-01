@@ -1,28 +1,3 @@
-library(tidyverse)
-library(jsonlite)
-library(reshape2)
-library(scales)
-library(lubridate)
-
-json <- fromJSON("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?countyname=")
-
-json_dates <- json %>% select(Report_Date) %>% mutate(Report_Date = ymd_hms(Report_Date))
-today <- ymd(max(json_dates$Report_Date))
-today <- format(today,"%B %d, %Y")
-
-statewide_vaccine <- json %>%
-  mutate(
-  Report_Date = ymd_hms(Report_Date),
-  AdministeredCountChange_7day_ma = (
-    AdministeredCountChange +
-    lag(AdministeredCountChange, order_by = Report_Date) +
-    lag(AdministeredCountChange, n = 2, order_by = Report_Date) +
-    lag(AdministeredCountChange, n = 3, order_by = Report_Date) +
-    lag(AdministeredCountChange, n = 4, order_by = Report_Date) +
-    lag(AdministeredCountChange, n = 5, order_by = Report_Date) +
-    lag(AdministeredCountChange, n = 6, order_by = Report_Date)
-  )/7
-)
 
 # Administered Doses
 statewide_vaccine %>%
@@ -40,7 +15,7 @@ ggplot() +
 # Theming
 labs(
   title="Administered COVID-19 Vaccine Doses in Illinois",
-  subtitle=str_glue("Total administered COVID-19 vaccine doses and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Total administered COVID-19 vaccine doses and 7-day moving average, as of {today.vax}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +

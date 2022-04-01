@@ -16,7 +16,7 @@ il.tested <- ggplot(stateDF) +
 # Theming
 labs(
   title="Illinois COVID-19 Test Count",
-  subtitle=str_glue("Number of tests administered and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Number of tests administered and 7-day moving average, as of {today.state}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
@@ -66,7 +66,7 @@ il.chg.tested <- ggplot(stateDF) +
 # Theming
 labs(
   title="Illinois COVID-19 Daily Test Count",
-  subtitle=str_glue("Change in the number of tests administered and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Change in the number of tests administered and 7-day moving average, as of {today.state}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
@@ -113,7 +113,7 @@ il.positive <- ggplot(stateDF) +
 # Theming
 labs(
   title="Illinois COVID-19 Positive Test Percentage",
-  subtitle=str_glue("Number of new cases divided by number of tests results and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Number of new cases divided by number of tests results and 7-day moving average, as of {today.state}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +

@@ -16,7 +16,7 @@ il.deaths <- ggplot(stateDF) +
 # Theming
 labs(
   title="Illinois COVID-19 Related Death Count",
-  subtitle=str_glue("Number of deaths and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Number of deaths and 7-day moving average, as of {today.state}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
@@ -66,7 +66,7 @@ il.chg.deaths <- ggplot(stateDF) +
 # Theming
 labs(
   title="Illinois COVID-19 Related Death Count",
-  subtitle=str_glue("Change in the number of deaths and 7-day moving average, as of {today}"),
+  subtitle=str_glue("Change in the number of deaths and 7-day moving average, as of {today.state}"),
   caption="Author: Chris Goodman (@cbgoodman), Data: IL Department of Public Health (https://dph.illinois.gov/).",
   y=NULL,
   x=NULL) +
